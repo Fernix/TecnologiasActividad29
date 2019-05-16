@@ -17,22 +17,16 @@ import java.util.List;
  */
 public class Client extends UnicastRemoteObject implements IClient{
     
+    private int ventanas = 0;
+    
     public Client() throws RemoteException {
         
     }
 
     @Override
-    public void iniciaProcesamiento(List<Image> imagenes) throws RemoteException {
-        int i=1;
-        for(Image img : imagenes) {
-            Main.getServer().notificaPorcentaje(
-                    (100 / imagenes.size()) * i
-                    , Main.getId()); 
-            new Thread(new FrameImage(img, i++)).start();
-            
-             
-            
-        }
+    public void iniciaProcesamiento(Image imagenes) throws RemoteException {
+           new Thread(new FrameImage(imagenes, ventanas++)).start();
+        
     }
     
 }

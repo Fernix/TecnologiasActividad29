@@ -7,7 +7,6 @@ package interfaz;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
 
 /**
  *
@@ -20,7 +19,7 @@ public interface IClient extends Remote{
      * @param imagenes 
      */
     
-public void iniciaProcesamiento(List<Image> imagenes) throws RemoteException;
+public void iniciaProcesamiento(Image imagenes) throws RemoteException;
     
     
 }

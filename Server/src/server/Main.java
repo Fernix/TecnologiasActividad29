@@ -55,7 +55,7 @@ public class Main {
                     int numcli = server.getClientes().size();
                     numeroClientes.setText(Integer.toString(numcli));
 
-                    repartirImagenes();
+                    repartirImagenes(server.getLista());
                 } catch (RemoteException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -134,27 +134,29 @@ public class Main {
 
     
     
-    public static void repartirImagenes() throws RemoteException {
+    public static void repartirImagenes(ArrayList<Image> imagenes) throws RemoteException {
 
         if (server.getClientes().isEmpty()) {
             return;
         }
+        
+        
+        int tamaño = imagenes.size();
+        int jugador = server.getClientes().size();
+        System.out.println("Tamaño: " + jugador);
 
-        int reparto = server.getLista().size()
-                / server.getClientes().size();
-        int indiceImagen = 0;
 
-        for (int i = 0; i < server.getClientes().size(); i++) {
-            ArrayList<Image> imagenes = new ArrayList();
-            for (int o = 0; o < reparto; o++) {
-                imagenes.add(server.getLista().get(indiceImagen));
-                indiceImagen++;
-
-            }
-            server.getClientes().get(i).iniciaProcesamiento(imagenes);
-
+        for (Image imagen : imagenes) {
+           
+             if (jugador == 0) { 
+                 jugador = server.getClientes().size();
+             }
+             jugador--;
+            server.getClientes().get(jugador).iniciaProcesamiento(imagen);
+            
+            
         }
-
+        
     }
 
     public Main() {
