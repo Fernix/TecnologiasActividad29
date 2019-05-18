@@ -15,11 +15,16 @@ public class Image implements Serializable {
     
     private String name;
     private String url;
+    private String identificador;
     
     public Image(String name, String url) {
         this.name = name;
         this.url = url;
     }
+
+  public Image() {
+  }
+
 
     /**
      * @return the name
@@ -48,5 +53,13 @@ public class Image implements Serializable {
     public void setUrl(String url) {
         this.url = url;
     }
+    
+  public void setIdentificador(String identificador) {
+    this.identificador = identificador;
+  }
+
+  public String getIdentificador() {
+    return identificador;
+  }
 
 }
