@@ -19,7 +19,11 @@ public interface IClient extends Remote{
      * @param imagenes 
      */
     
+<<<<<<< HEAD
 public void iniciaProcesamiento(Image imagenes) throws RemoteException;
+=======
+public void iniciaProcesamiento(Image imagen) throws RemoteException;
+>>>>>>> master
     
     
 }

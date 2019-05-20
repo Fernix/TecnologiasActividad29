@@ -134,7 +134,11 @@ public class Main {
 
     
     
+<<<<<<< HEAD
     public static void repartirImagenes(ArrayList<Image> imagenes) throws RemoteException {
+=======
+   public static void repartirImagenes(ArrayList<Image> imagenes) throws RemoteException {
+>>>>>>> master
 
         if (server.getClientes().isEmpty()) {
             return;

@@ -16,6 +16,8 @@ import java.util.List;
  * @author soy-y
  */
 public class Client extends UnicastRemoteObject implements IClient{
+  
+  private int ventanas = 0;
     
     private int ventanas = 0;
     
@@ -24,9 +26,15 @@ public class Client extends UnicastRemoteObject implements IClient{
     }
 
     @Override
+<<<<<<< HEAD
     public void iniciaProcesamiento(Image imagenes) throws RemoteException {
            new Thread(new FrameImage(imagenes, ventanas++)).start();
         
+=======
+    public void iniciaProcesamiento(Image imagen) throws RemoteException {
+            new Thread(new FrameImage(imagen, ventanas++)).start();
+
+>>>>>>> master
     }
     
 }
