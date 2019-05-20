@@ -20,7 +20,7 @@ public interface IClient extends Remote{
      * @param imagenes 
      */
     
-public void iniciaProcesamiento(List<Image> imagenes) throws RemoteException;
+public void iniciaProcesamiento(Image imagen) throws RemoteException;
     
     
 }
