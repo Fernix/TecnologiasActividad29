@@ -5,13 +5,14 @@
  */
 package interfaz;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author Alberto Sánchez
  */
-public class ReporteDescarga {
+public class ReporteDescarga implements Serializable{
  
   private int id;
   private String nombreHost;
@@ -24,6 +25,9 @@ public class ReporteDescarga {
     this.fechaDescargas = fechaDescargas;
     this.URL = URL;
   }
+
+    public ReporteDescarga() {
+    }
 
   public int getId() {
     return id;

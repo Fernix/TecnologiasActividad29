@@ -6,6 +6,7 @@
 package client;
 
 import interfaz.IServer;
+import interfaz.ReporteDescarga;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.rmi.RemoteException;
@@ -35,6 +36,16 @@ public class Main {
     private static Client cliente;
     
     private static int id;
+    
+    private static ReporteDescarga rd;
+
+    public static ReporteDescarga getRd() {
+        return rd;
+    }
+
+    public static void setRd(ReporteDescarga rd) {
+        Main.rd = rd;
+    }
 
     public static IServer getServer() {
         return server;
@@ -73,6 +84,9 @@ public class Main {
             Registry registro = LocateRegistry.getRegistry(HOSTNAMESERVER, PORT);
             server = (IServer) registro.lookup(NAMESERVICE);
             id = server.registraCallBackCliente(cliente);
+            rd = new ReporteDescarga();
+            rd.setId(id);
+            rd.setNombreHost(HOSTNAMESERVER);
         }
         catch(Exception ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);

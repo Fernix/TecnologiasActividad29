@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 import javax.swing.*;
+import java.util.Date;
 
 /**
  *
@@ -53,6 +54,66 @@ public class Conection {
     }
   }
   
+    public void reportarDescarga(ReporteDescarga rd) {
+        consultaSql = "INSERT INTO REPORTE_DESCARGAS(NOMBRE_HOST, FECHA_DESCARGA, URL) " + "VALUES(?, ?, ?)";
+        try {
+            String nombre_host = rd.getNombreHost();
+            java.sql.Date fechaDescarga = new java.sql.Date(rd.getFechaDescargas().getTime());
+            String URL = rd.getURL();
+            conection = DriverManager.getConnection("jdbc:derby://localhost:1527/" + "C:\\temp\\Ejercicio29\\Derby;");
+            preparedStatement = conection.prepareStatement(consultaSql);
+            preparedStatement.setString(1, nombre_host);
+            preparedStatement.setDate(2, fechaDescarga);
+            preparedStatement.setString(3, URL);
+            preparedStatement.execute();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+    
+    public ArrayList<ReporteDescarga> obtenerReportes() {
+        
+        
+        consultaSql = "SELECT * FROM REPORTE_DESCARGAS";
+        ArrayList<ReporteDescarga> reportes = new ArrayList<>();
+    try {
+      conection = DriverManager.getConnection("jdbc:derby://localhost:1527/" + "C:\\temp\\Ejercicio29\\Derby;");
+      
+      statement = conection.createStatement();
+      result = statement.executeQuery(consultaSql);
+      while (result.next()) {
+        ReporteDescarga rd = new ReporteDescarga();
+        rd.setId(result.getInt(1));
+        rd.setNombreHost(result.getString(2));
+        rd.setFechaDescargas(result.getDate(3));
+        rd.setURL(result.getString(4));
+        reportes.add(rd);
+      }
+      result.close();
+    } catch (SQLException ex) {
+      Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      try {
+        conection.close();
+      } catch (SQLException ex) {
+        Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+    if (listaImagenes == null || listaImagenes.isEmpty()) {
+      return null;
+    }
+    return reportes;
+        
+    }
+    
   public ArrayList<Image> obtieneListaImagenes() {
     consultaSql = "SELECT * FROM IMAGEN";
     try {

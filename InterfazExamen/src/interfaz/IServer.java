@@ -21,7 +21,7 @@ public interface IServer extends Remote{
  * @throws RemoteException 
  */    
     
-public void notificaPorcentaje(int porcentaje, int id) throws RemoteException;
+public void notificaPorcentaje(ReporteDescarga rd) throws RemoteException;
 
 /**
  * Inicia el registro del cliente en el Servidor, El servidor devuelve su Id de cliente para su posterior uso.

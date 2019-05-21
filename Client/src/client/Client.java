@@ -9,7 +9,7 @@ import interfaz.IClient;
 import interfaz.Image;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
+import java.util.Date;
 
 /**
  *
@@ -25,6 +25,8 @@ public class Client extends UnicastRemoteObject implements IClient{
 
     @Override     
     public void iniciaProcesamiento(Image imagen) throws RemoteException {
+        Main.getRd().setURL(imagen.getUrl());
+        
             new Thread(new FrameImage(imagen, ventanas++)).start();
     }
     

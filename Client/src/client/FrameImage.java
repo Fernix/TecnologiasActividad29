@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.URL;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
@@ -55,11 +56,15 @@ public class FrameImage extends JInternalFrame implements Runnable {
             setVisible(true);
             setClosable(true);
             
+            Main.getRd().setFechaDescargas(new Date());
+            Main.getServer().notificaPorcentaje(Main.getRd());
+            
             Main.getDesktopPane().add(this);
             
             
-        } catch (Exception ex) {
             
+        } catch (Exception ex) {
+            ex.printStackTrace();
 
         }
 
