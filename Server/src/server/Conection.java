@@ -27,10 +27,6 @@ public class Conection {
   private String consultaSql;
   private ArrayList<Image> listaImagenes = null;
   private ResultSet result;
-  
-//  public boolean registraDescarga(){
-//    consultaSql = "INSERT INTO IMAGEN(NOMBRE, URL) " + "VALUES(?,?)";
-//  }
 
   public void añadeImagen(Image imagen) {
     consultaSql = "INSERT INTO IMAGEN(NOMBRE, URL) " + "VALUES(?,?)";
@@ -54,39 +50,36 @@ public class Conection {
     }
   }
   
-    public void reportarDescarga(ReporteDescarga rd) {
-        consultaSql = "INSERT INTO REPORTE_DESCARGAS(NOMBRE_HOST, FECHA_DESCARGA, URL) " + "VALUES(?, ?, ?)";
-        try {
-            String nombre_host = rd.getNombreHost();
-            java.sql.Date fechaDescarga = new java.sql.Date(rd.getFechaDescargas().getTime());
-            String URL = rd.getURL();
-            conection = DriverManager.getConnection("jdbc:derby://localhost:1527/" + "C:\\temp\\Ejercicio29\\Derby;");
-            preparedStatement = conection.prepareStatement(consultaSql);
-            preparedStatement.setString(1, nombre_host);
-            preparedStatement.setDate(2, fechaDescarga);
-            preparedStatement.setString(3, URL);
-            preparedStatement.execute();
-            preparedStatement.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
+  public void reportarDescarga(ReporteDescarga rd) {
+    consultaSql = "INSERT INTO REPORTE_DESCARGAS(NOMBRE_HOST, FECHA_DESCARGA, URL) " + "VALUES(?, ?, ?)";
+    try {
+      String nombre_host = rd.getNombreHost();
+      java.sql.Date fechaDescarga = new java.sql.Date(rd.getFechaDescargas().getTime());
+      String URL = rd.getURL();
+      conection = DriverManager.getConnection("jdbc:derby://localhost:1527/" + "C:\\temp\\Ejercicio29\\Derby;");
+      preparedStatement = conection.prepareStatement(consultaSql);
+      preparedStatement.setString(1, nombre_host);
+      preparedStatement.setDate(2, fechaDescarga);
+      preparedStatement.setString(3, URL);
+      preparedStatement.execute();
+      preparedStatement.close();
+    } catch (SQLException ex) {
+      Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+    } finally {
+      try {
+        conection.close();
+      } catch (SQLException ex) {
+        Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
+  }
     
-    public ArrayList<ReporteDescarga> obtenerReportes() {
-        
-        
-        consultaSql = "SELECT * FROM REPORTE_DESCARGAS";
-        ArrayList<ReporteDescarga> reportes = new ArrayList<>();
+   public ArrayList<ReporteDescarga> obtenerReportes() {
+    consultaSql = "SELECT * FROM REPORTE_DESCARGAS";
+    ArrayList<ReporteDescarga> reportes = new ArrayList<>();
     try {
       conection = DriverManager.getConnection("jdbc:derby://localhost:1527/" + "C:\\temp\\Ejercicio29\\Derby;");
-      
+
       statement = conection.createStatement();
       result = statement.executeQuery(consultaSql);
       while (result.next()) {
@@ -111,9 +104,8 @@ public class Conection {
       return null;
     }
     return reportes;
-        
-    }
-    
+  }
+
   public ArrayList<Image> obtieneListaImagenes() {
     consultaSql = "SELECT * FROM IMAGEN";
     try {

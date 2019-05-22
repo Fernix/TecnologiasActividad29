@@ -31,11 +31,8 @@ public class Server extends UnicastRemoteObject implements IServer{
   public Server() throws RemoteException {
     clientes = new ArrayList();
     lista = new ArrayList();
-
-    
     clientes = new ArrayList();
     Conection conexion = new Conection();
-
     lista = conexion.obtieneListaImagenes();
   }
     

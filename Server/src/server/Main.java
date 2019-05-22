@@ -68,9 +68,10 @@ public class Main {
     
     private static void iniciarGUI() {
         frame = new JFrame("Examen");
-        frame.setSize(800, 600);
+        frame.setSize(400, 400);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+        frame.setLocationRelativeTo(null);
+        
         desktopPane = new JDesktopPane();
 
         frame.setContentPane(desktopPane);
